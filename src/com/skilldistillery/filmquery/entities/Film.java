@@ -3,7 +3,6 @@ package com.skilldistillery.filmquery.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Film {
 	private int id;
 	private String title;
@@ -132,12 +131,13 @@ public class Film {
 		String actorsNames = "";
 		if (cast.size() == 0) {
 			actorsNames = "There are no actors/actresses in this film.";
-		
+
 		} else {
-		for (Actor actor : cast) {
+			for (Actor actor : cast) {
 				actorsNames += actor.getLastName() + ", " + actor.getFirstName() + "\t";
+			}
 		}
-		}return actorsNames;
+		return actorsNames;
 	}
 
 	public void setCast(List<Actor> cast) {

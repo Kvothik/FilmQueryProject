@@ -1,13 +1,11 @@
 package com.skilldistillery.filmquery.app;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
-import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
 
 public class FilmQueryApp {
@@ -56,6 +54,16 @@ public class FilmQueryApp {
 					System.out.println("There is no film with this ID. Please try again.");
 				} else {
 					System.out.println(film);
+				}
+				System.out.println("1. Return to main menu\t2. Show all film details");
+				int subMenu = input.nextInt();
+				if (subMenu == 1) {
+					break;
+				} else if (subMenu == 2) {
+					film = db.findFilmByIdComplete(filmId);
+					System.out.println(film);
+				} else {
+					System.out.println("Invalid Selection, please try again.");
 				}
 				break;
 			case 2:
