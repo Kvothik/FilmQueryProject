@@ -115,15 +115,15 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	@Override
 	public List<Actor> findActorsByFilmId(int filmId) {
 		List<Actor> actors = new ArrayList<>();
-		Actor actor = null;
+		Actor actor = null; // Create the object
 		try {
-			String sql = "SELECT id, first_name, last_name FROM actor JOIN film_actor ON actor.id = film_actor.actor_id WHERE id = ?";
+			String sql = "SELECT id, first_name, last_name FROM actor JOIN film_actor ON actor.id = film_actor.actor_id WHERE film_id = ?";
 			PreparedStatement stmt = setUp().prepareStatement(sql);
 			stmt.setInt(1, filmId);
 			ResultSet actorResult = stmt.executeQuery();
 			while (actorResult.next()) {
-				actor = new Actor(); // Create the object
 				// Here is our mapping of query columns to our object fields:
+				actor = new Actor();
 				actor.setId(actorResult.getInt("id"));
 				actor.setFirstName(actorResult.getString("first_name"));
 				actor.setLastName(actorResult.getString("last_name"));
@@ -143,7 +143,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	public Film findFilmById(int filmId) {
 		Film film = new Film();
 		try {
-			String sql = "SELECT *, language.name FROM film join language on film.language_id = language.id WHERE film.id = ?"; 
+			String sql = "SELECT *, language.name FROM film join language on film.language_id = language.id WHERE film.id = ?";
 			PreparedStatement stmt = setUp().prepareStatement(sql);
 			stmt.setInt(1, filmId);
 			ResultSet rs = stmt.executeQuery();
