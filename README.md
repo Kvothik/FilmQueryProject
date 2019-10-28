@@ -14,7 +14,7 @@ findActorById(): This method returns the ID, first  name, and last name of the a
 
 findFilmsByActorId(): This method returns every field of the film table by actor ID.
 
-findActorsByFilmId(): This method returns all actors in a list that played in a film, by film ID.
+findActorsByFilmId(): This method returns all actors from a list that played in a film, by film ID.
 
 findFilmById(): This method returns the title, release year, rating, description, and language of a film by its ID.
 

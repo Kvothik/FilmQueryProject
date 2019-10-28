@@ -121,7 +121,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			PreparedStatement stmt = setUp().prepareStatement(sql);
 			stmt.setInt(1, filmId);
 			ResultSet actorResult = stmt.executeQuery();
-			if (actorResult.next()) {
+			while (actorResult.next()) {
 				actor = new Actor(); // Create the object
 				// Here is our mapping of query columns to our object fields:
 				actor.setId(actorResult.getInt("id"));
@@ -129,10 +129,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				actor.setLastName(actorResult.getString("last_name"));
 //				actor.setFilms(findFilmsByActorId(filmId));
 				actors.add(actor);
-				actorResult.close();
-				stmt.close();
-				setUp().close();
 			}
+			actorResult.close();
+			stmt.close();
+			setUp().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -184,8 +184,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				String desc = rs.getString("description");
 				String lang = rs.getString("language.name");
 				film = new Film(title, releaseYear, rating, desc, lang);
-				film.setCast(findActorsByFilmId(id));
 				searchResult.add(film);
+				film.setCast(findActorsByFilmId(id));
 			}
 			rs.close();
 			stmt.close();
